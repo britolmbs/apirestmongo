@@ -2,6 +2,7 @@ package com.britolmbs.apirestmongo.config;
 
 import com.britolmbs.apirestmongo.domain.Post;
 import com.britolmbs.apirestmongo.domain.User;
+import com.britolmbs.apirestmongo.dto.AuthorDTO;
 import com.britolmbs.apirestmongo.repository.PostRepository;
 import com.britolmbs.apirestmongo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +35,12 @@ public class Instantiation implements CommandLineRunner {
         User dilma = new User(null, "Dilma Brito", "dilma@gmail.com");
         User thor = new User(null, "Thor", "thor@gmail.com");
 
-        Post post1 = new Post(null, sdf.parse("20/01/2023"), "Partiu viagem", "Vou viajar para São Paulo.", lucas);
-        Post post2 = new Post(null, sdf.parse("21/01/2023"), "Bom dia!", "Acordei, feliz hoje", lucas);
-
         userRepository.save(Arrays.asList(lucas, dilma, thor));
+
+        Post post1 = new Post(null, sdf.parse("20/01/2023"), "Partiu viagem", "Vou viajar para São Paulo.", new AuthorDTO(lucas) );
+        Post post2 = new Post(null, sdf.parse("21/01/2023"), "Bom dia!", "Acordei, feliz hoje", new AuthorDTO(lucas));
+
+
         postRepository.save(Arrays.asList(post1,post2));
     }
 }
